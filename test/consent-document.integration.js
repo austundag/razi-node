@@ -126,6 +126,4 @@ describe('consent document integration', function consentDocumentIntegration() {
     listConsentDocuments();
 
     it('list consent document full history', tests.listConsentDocumentsHistoryFn());
-
-    shared.verifyUserAudit();
 });

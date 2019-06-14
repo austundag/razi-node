@@ -305,6 +305,4 @@ describe('user consent document/signature integration', function userConsentDocu
     it('check ip and browser (user-agent) of signature', function checkIpBrowser() {
         return userConsentDocumentCommon.verifySignatureIpAndUserAgent(documentCount + 3);
     });
-
-    shared.verifyUserAudit();
 });

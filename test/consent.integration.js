@@ -264,6 +264,4 @@ describe('consent integration', function consentIntegration() {
 
     it('check ip and browser (user-agent) of signature',
         tests.checkIpAndBroswerFn());
-
-    shared.verifyUserAudit();
 });

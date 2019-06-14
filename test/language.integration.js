@@ -88,6 +88,4 @@ describe('language integration', () => {
     });
 
     it('list existing languages', listLanguagesFn);
-
-    shared.verifyUserAudit();
 });

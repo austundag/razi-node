@@ -272,6 +272,4 @@ describe('user integration', function userIntegration() {
     userCount += 1;
 
     it('logout as super', shared.logoutFn());
-
-    // shared.verifyUserAudit();
 });

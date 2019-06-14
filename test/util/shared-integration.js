@@ -201,27 +201,6 @@ class SharedIntegration {
         };
     }
 
-    verifyUserAudit() {
-        const rrSuperTest = this.rrSuperTest;
-        it('login as super', this.loginFn(config.superUser));
-
-        it('verify user audit', function vua() {
-            const userAudit = rrSuperTest.getUserAudit();
-            return rrSuperTest.get('/users', true, 200, { role: 'all' })
-                .then(res => new Map(res.body.map(user => [user.username, user.id])))
-                .then(userMap => userAudit.map(({ username, operation, endpoint }) => {
-                    const userId = userMap.get(username);
-                    return { userId, operation, endpoint };
-                }))
-                .then((expected) => {
-                    const px = rrSuperTest.get('/user-audits', true, 200);
-                    return px.then(resAudit => expect(resAudit.body).to.deep.equal(expected));
-                });
-        });
-
-        it('logout as super', this.logoutFn());
-    }
-
     verifyErrorMessage(res, code, ...params) { // eslint-disable-line class-methods-use-this
         return errHandler.verifyErrorMessage(res, code, ...params);
     }

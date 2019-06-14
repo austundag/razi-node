@@ -15,7 +15,6 @@ module.exports = class RRSupertest {
         if (addlPath) {
             this.baseUrl += addlPath;
         }
-        this.userAudit = [];
         this.username = null;
     }
 
@@ -61,14 +60,7 @@ module.exports = class RRSupertest {
         return jwt;
     }
 
-    getUserAudit() {
-        return this.userAudit;
-    }
-
     update(operation, endpoint, payload, status, header, validationError) {
-        if (status < 401 && this.username && !validationError) {
-            this.userAudit.push({ username: this.username, operation, endpoint });
-        }
         const r = this.server[operation](this.baseUrl + endpoint);
         if (header) {
             _.toPairs(header).forEach(([key, value]) => r.set(key, value));
@@ -81,9 +73,6 @@ module.exports = class RRSupertest {
     }
 
     postFile(endpoint, field, filepath, payload, status) {
-        if (status < 401 && this.username) {
-            this.userAudit.push({ username: this.username, operation: 'post', endpoint });
-        }
         const filename = path.basename(filepath);
         const request = this.server
             .post(this.baseUrl + endpoint)
@@ -99,9 +88,6 @@ module.exports = class RRSupertest {
     }
 
     put(endpoint, payload, status, query) {
-        if (status < 401 && this.username) {
-            this.userAudit.push({ username: this.username, operation: 'put', endpoint });
-        }
         let r = this.server.put(this.baseUrl + endpoint);
         if (query && !_.isEmpty(query)) {
             r = r.query(query);
@@ -118,9 +104,6 @@ module.exports = class RRSupertest {
     }
 
     delete(endpoint, status, query) {
-        if (status < 401 && this.username) {
-            this.userAudit.push({ username: this.username, operation: 'delete', endpoint });
-        }
         let r = this.server.delete(this.baseUrl + endpoint);
         if (query) {
             r = r.query(query);
@@ -129,9 +112,6 @@ module.exports = class RRSupertest {
     }
 
     get(endpoint, auth, status, query) {
-        if (status < 401 && this.username) {
-            this.userAudit.push({ username: this.username, operation: 'get', endpoint });
-        }
         let r = this.server.get(this.baseUrl + endpoint);
         if (query && !_.isEmpty(query)) {
             r = r.query(query);

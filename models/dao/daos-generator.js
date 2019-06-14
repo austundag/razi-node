@@ -8,8 +8,6 @@ const ConsentSignatureDAO = require('./consent-signature.dao');
 const UserConsentDocumentDAO = require('./user-consent-document.dao');
 const ConsentDAO = require('./consent.dao');
 const LanguageDAO = require('./language.dao');
-const UserAuditDAO = require('./user-audit.dao');
-const Macro = require('./macro');
 const FileDAO = require('./file.dao');
 
 const doasPerSchema = function (db, daosGenerator) {
@@ -21,7 +19,6 @@ const doasPerSchema = function (db, daosGenerator) {
     const auth = new AuthDAO(db);
     const consent = new ConsentDAO(db, { consentDocument });
     const language = new LanguageDAO(db);
-    const userAudit = new UserAuditDAO(db);
     const file = new FileDAO(db);
 
     return {
@@ -34,7 +31,6 @@ const doasPerSchema = function (db, daosGenerator) {
         userConsentDocument,
         consent,
         language,
-        userAudit,
         file,
     };
 };

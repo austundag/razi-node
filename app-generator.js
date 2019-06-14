@@ -29,30 +29,6 @@ const errHandler = function (err, req, res, next) { // eslint-disable-line no-un
     res.json(jsonErr);
 };
 
-const userAudit = function (req, res, next) {
-    const userId = _.get(req, 'user.id');
-    if (userId) {
-        const operationSpec = _.get(req, 'swagger.operationPath', ['', '', '']);
-        let endpoint = operationSpec[1];
-        const operation = operationSpec[2];
-        if (req.swagger.params) {
-            _.forOwn(req.swagger.params, (description, name) => {
-                const value = description && description.value;
-                if (value && _.get(description, 'schema.in') === 'path') {
-                    endpoint = endpoint.replace(`{${name}}`, value);
-                }
-            });
-        }
-        if (endpoint !== '/user-audits') {
-            req.models.userAudit.createUserAudit({ userId, endpoint, operation })
-                .then(() => next())
-                .catch(err => next(err));
-            return;
-        }
-    }
-    next();
-};
-
 const modelsSupplyFn = function (inputModels) {
     return function modelsSupply(req, res, next) { // eslint-disable-line no-unused-vars
         req.models = inputModels;
@@ -114,8 +90,6 @@ exports.initialize = function initialize(app, options, callback) {
         }
 
         app.use(middleware.swaggerSecurity(security));
-
-        app.use(userAudit);
 
         const controllers = options.controllers || './controllers';
         app.use(middleware.swaggerRouter({

@@ -98,6 +98,4 @@ describe('consent type integration', function consentTypeIntegration() {
     });
 
     it('logout as super', shared.logoutFn());
-
-    shared.verifyUserAudit();
 });
