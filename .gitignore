@@ -1,0 +1,36 @@
+# build directories
+.tmp
+.sass-cache
+.idea
+client/bower_components
+coverage
+dist
+node_modules
+npm-debug.log
+package-lock.json
+public
+test/generated
+
+# environment
+.env
+.env.gfi
+.env.transmitting
+env.sh
+env.production.user
+env.production.head
+sandbox
+/server/config/local.env.js
+config/config.json
+
+# DB
+migration/sequelize-meta.json
+
+# OS specifics
+*.DS_Store
+
+tmp/*
+
+# Static Code Analysis
+/artifacts
+
+.vscode/*
