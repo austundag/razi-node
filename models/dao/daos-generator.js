@@ -8,7 +8,6 @@ const ConsentSignatureDAO = require('./consent-signature.dao');
 const UserConsentDocumentDAO = require('./user-consent-document.dao');
 const ConsentDAO = require('./consent.dao');
 const LanguageDAO = require('./language.dao');
-const FileDAO = require('./file.dao');
 
 const doasPerSchema = function (db, daosGenerator) {
     const consentType = new ConsentTypeDAO(db);
@@ -19,7 +18,6 @@ const doasPerSchema = function (db, daosGenerator) {
     const auth = new AuthDAO(db);
     const consent = new ConsentDAO(db, { consentDocument });
     const language = new LanguageDAO(db);
-    const file = new FileDAO(db);
 
     return {
         sequelize: db.sequelize,
@@ -31,7 +29,6 @@ const doasPerSchema = function (db, daosGenerator) {
         userConsentDocument,
         consent,
         language,
-        file,
     };
 };
 

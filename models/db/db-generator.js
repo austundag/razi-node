@@ -12,7 +12,6 @@ const consentSignature = require('./consent-signature.model');
 const consentSection = require('./consent-section.model');
 const consent = require('./consent.model');
 const language = require('./language.model');
-const file = require('./file.model');
 const consentRole = require('./consent-role.model');
 
 const defineTables = function (sequelize, Sequelize, schema) {
@@ -26,7 +25,6 @@ const defineTables = function (sequelize, Sequelize, schema) {
     const ConsentSection = consentSection(sequelize, Sequelize, schema);
     const Consent = consent(sequelize, Sequelize, schema);
     const Language = language(sequelize, Sequelize, schema);
-    const File = file(sequelize, Sequelize, schema);
 
     return {
         sequelize,
@@ -39,7 +37,6 @@ const defineTables = function (sequelize, Sequelize, schema) {
         ConsentSection,
         Consent,
         Language,
-        File,
         ConsentRole,
         schema,
     };

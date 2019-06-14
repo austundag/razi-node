@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --harmony index.js",
-    "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha -t 10000 --exit --bail test/*.js test/use-cases/*.js test/import-export/*.js",
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/_mocha -t 10000 --exit --bail test/*.js test/use-cases/*.js",
     "beautify": "esw *.js app report-test --color --fix",
     "coverage": "NODE_ENV=test istanbul cover --report cobertura ./node_modules/mocha/bin/_mocha -- -R spec --recursive -t 10000"
   },
